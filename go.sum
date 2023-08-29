@@ -114,6 +114,8 @@ github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829003820-8
 github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829003820-816d382e8635/go.mod h1:mrLsAjcA0yJMzheX+nLgidJSa/HRYE27wYjLYKPJGG0=
 github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829004441-e8ba328633d4 h1:TTsukHL0VL6UsBo6Kqt+j5ahEs4VriQrEe26o2MT8M0=
 github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829004441-e8ba328633d4/go.mod h1:mrLsAjcA0yJMzheX+nLgidJSa/HRYE27wYjLYKPJGG0=
+github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829131257-7676e68872d9 h1:HU6DlCB3vnXbxaNZryRADPnHLBz9rgPcp9FGbTOs3N0=
+github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829131257-7676e68872d9/go.mod h1:mrLsAjcA0yJMzheX+nLgidJSa/HRYE27wYjLYKPJGG0=
 github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230825133042-b503c90185eb h1:2ztEa6PajwDD5Wa34E6+cnOwn2zL+D73R9fOOwViFdc=
 github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230825133042-b503c90185eb/go.mod h1:Vq7VZm5k5CWmNlWdk2HzZNDjpy10VkEZtXomiiRDFlw=
 github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230828143054-602096f4fc6f h1:fvwQ4vGyBwNZLNjnVDKMOqQE+P2xl8BaXXX/QKzrlyc=
@@ -172,6 +174,8 @@ github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829003820-816d3
 github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829003820-816d382e8635/go.mod h1:Vq7VZm5k5CWmNlWdk2HzZNDjpy10VkEZtXomiiRDFlw=
 github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829004441-e8ba328633d4 h1:Au+K5LFvv0juEtaFqMaD62KulXfWD3K2kd8mf5stlyg=
 github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829004441-e8ba328633d4/go.mod h1:Vq7VZm5k5CWmNlWdk2HzZNDjpy10VkEZtXomiiRDFlw=
+github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829131257-7676e68872d9 h1:cjEf+pgpbH+WBEMg8p4QneBXvU1C5vrxdMOxHsJBWFY=
+github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829131257-7676e68872d9/go.mod h1:Vq7VZm5k5CWmNlWdk2HzZNDjpy10VkEZtXomiiRDFlw=
 github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230825133042-b503c90185eb h1:XWXZasCdO1M7CQljb/aYU8NRRnjUrOF8ESAa+meifjE=
 github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230825133042-b503c90185eb/go.mod h1:pHMAZDEL4tGJMcs77+U1YdZIu9Su33A8B7yFeuM0n0o=
 github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230828143054-602096f4fc6f h1:ZXno6+zGINPMFf4pTZ8M9SFk97elhvVz6kLPLghkBY0=
@@ -228,6 +232,8 @@ github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829003820-816d
 github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829003820-816d382e8635/go.mod h1:pHMAZDEL4tGJMcs77+U1YdZIu9Su33A8B7yFeuM0n0o=
 github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829004441-e8ba328633d4 h1:t8eA/8nIWjDaMcfmfMv8yqshnaksUwd8VIsdfz4+jnQ=
 github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829004441-e8ba328633d4/go.mod h1:pHMAZDEL4tGJMcs77+U1YdZIu9Su33A8B7yFeuM0n0o=
+github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829131257-7676e68872d9 h1:r/qeW+o5bGmBO04K0dYdRar9klTzpy6ka6dD5+/13io=
+github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829131257-7676e68872d9/go.mod h1:pHMAZDEL4tGJMcs77+U1YdZIu9Su33A8B7yFeuM0n0o=
 github.com/cespare/cp v0.1.0/go.mod h1:SOGHArjBr4JWaSDEVpWpo/hNg6RoKrls6Oh40hiwW+s=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=

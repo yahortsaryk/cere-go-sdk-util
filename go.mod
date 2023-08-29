@@ -6,9 +6,9 @@ require (
 	github.com/ChainSafe/go-schnorrkel v1.0.0 // indirect
 	github.com/centrifuge/go-substrate-rpc-client v2.0.0+incompatible // indirect
 	github.com/centrifuge/go-substrate-rpc-client/v4 v4.1.0 // indirect
-	github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829004441-e8ba328633d4 // indirect
-	github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829004441-e8ba328633d4 // indirect
-	github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829004441-e8ba328633d4 // indirect
+	github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230829131257-7676e68872d9 // indirect
+	github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230829131257-7676e68872d9 // indirect
+	github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230829131257-7676e68872d9 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/decred/base58 v1.0.4 // indirect
