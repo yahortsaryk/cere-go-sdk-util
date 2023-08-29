@@ -23,6 +23,8 @@ func main() {
 	getNodeList(bucketContract)
 	getCdnNodeList(bucketContract)
 	getClustersList(bucketContract)
+	getBucket(bucketContract)
+	// getBucketsList(bucketContract)
 }
 
 func getCluster(bucketContract bucket.DdcBucketContract) {
@@ -63,6 +65,15 @@ func getCdnNode(bucketContract bucket.DdcBucketContract) {
 	}
 }
 
+func getBucket(bucketContract bucket.DdcBucketContract) {
+	bucket, err := bucketContract.BucketGet(types.NewU32(0))
+	if err != nil {
+		log.WithError(err).Fatal("Cannot get a bucket")
+	} else {
+		log.Printf("Bucket - %v", bucket)
+	}
+}
+
 func getNodeList(bucketContract bucket.DdcBucketContract) {
 	nodes, err := bucketContract.NodeList(0, 10, types.OptionAccountID{})
 	if err != nil {
@@ -89,6 +100,15 @@ func getClustersList(bucketContract bucket.DdcBucketContract) {
 		log.Printf("Clusters - %v", clusters)
 	}
 }
+
+// func getBucketsList(bucketContract bucket.DdcBucketContract) {
+// 	buckets, err := bucketContract.BucketList(0, 10, types.OptionAccountID{})
+// 	if err != nil {
+// 		log.WithError(err).Fatal("Cannot get buckets list")
+// 	} else {
+// 		log.Printf("Buckets - %v", buckets)
+// 	}
+// }
 
 func createContracts() bucket.DdcBucketContract {
 	var client contract.BlockchainClient = nil
