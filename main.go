@@ -1,30 +1,61 @@
 package main
 
 import (
-	"time"
-
 	"github.com/centrifuge/go-substrate-rpc-client/v4/types"
 	contract "github.com/cerebellum-network/cere-ddc-sdk-go/contract/pkg"
 	"github.com/cerebellum-network/cere-ddc-sdk-go/contract/pkg/bucket"
-	"github.com/cerebellum-network/cere-ddc-sdk-go/contract/pkg/cache"
 	log "github.com/sirupsen/logrus"
 )
 
 const (
-	DDC_SC_ADDRESS     = "6Thd2amHgEWgwTM9P1KfzqXkyKEbQZKV2eNoChJA19Jeks4q"
-	BLOCKCHAIN_RPC_URL = "ws://127.0.0.1:9944"
+	DDC_SC_ADDRESS     = "6QHgFfxkYyMdUqMw2rpykwGbKbtiof5bYvFMg17swct85vvX"
+	BLOCKCHAIN_RPC_URL = "wss://archive.devnet.cere.network/ws"
 )
 
 func main() {
-	bucketContract := createContracts()
-	getNode(bucketContract)
-	getCdnNode(bucketContract)
-	getCluster(bucketContract)
-	getNodeList(bucketContract)
-	getCdnNodeList(bucketContract)
-	getClustersList(bucketContract)
-	getBucket(bucketContract)
-	getBucketsList(bucketContract)
+	bucketContract := createContract()
+
+	getNode(*bucketContract)
+	getCdnNode(*bucketContract)
+	getCluster(*bucketContract)
+	getNodeList(*bucketContract)
+	getCdnNodeList(*bucketContract)
+	getClustersList(*bucketContract)
+	getBucket(*bucketContract)
+	getBucketsList(*bucketContract)
+
+	listenToEvents(*bucketContract)
+
+	select {}
+}
+
+func createContract() *bucket.DdcBucketContract {
+	var client contract.BlockchainClient = nil
+	client = contract.CreateBlockchainClient(BLOCKCHAIN_RPC_URL)
+
+	c := ddcBucketContract(client)
+
+	if err := client.SetEventDispatcher(DDC_SC_ADDRESS, c.GetEventDispatcher()); err != nil {
+		log.WithError(err).Fatal("Unable to set event dispatcher")
+	}
+
+	return &c
+}
+
+func ddcBucketContract(client contract.BlockchainClient) bucket.DdcBucketContract {
+	return bucket.CreateDdcBucketContract(client, DDC_SC_ADDRESS)
+}
+
+func listenToEvents(bucketContract bucket.DdcBucketContract) {
+	log.Print("Registring event handler ...")
+
+	bucketContract.AddContractEventHandler(bucket.NodeCreatedEventId, func(raw interface{}) {
+		log.Printf("NodeCreatedEvent raw: %v", raw)
+		nodeCreatedEvent := raw.(*bucket.NodeCreatedEvent)
+		log.Printf("NodeCreatedEvent: %v", nodeCreatedEvent)
+	})
+
+	log.Print("Waiting for events ...")
 }
 
 func getCluster(bucketContract bucket.DdcBucketContract) {
@@ -38,7 +69,7 @@ func getCluster(bucketContract bucket.DdcBucketContract) {
 }
 
 func getNode(bucketContract bucket.DdcBucketContract) {
-	key, err := types.NewAccountIDFromHexString("0x00f9a6e388598a10527dc3b203f1293df6cfa865610e04c60a4eb76b535beb3e")
+	key, err := types.NewAccountIDFromHexString("0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d")
 	if err != nil {
 		log.Printf("Error parsing node key - %v", key)
 	}
@@ -52,7 +83,7 @@ func getNode(bucketContract bucket.DdcBucketContract) {
 }
 
 func getCdnNode(bucketContract bucket.DdcBucketContract) {
-	key, err := types.NewAccountIDFromHexString("0x7473fa5f3b345ebc8968879533fc690be483cd402153d3ccbb500c22a8f6726d")
+	key, err := types.NewAccountIDFromHexString("0xfe65717dad0447d715f660a0a58411de509b42e6efb8375f562f58a554d5860e")
 	if err != nil {
 		log.Printf("Error parsing node key - %v", key)
 	}
@@ -108,36 +139,4 @@ func getBucketsList(bucketContract bucket.DdcBucketContract) {
 	} else {
 		log.Printf("Buckets - %v", buckets)
 	}
-}
-
-func createContracts() bucket.DdcBucketContract {
-	var client contract.BlockchainClient = nil
-	client = contract.CreateBlockchainClient(BLOCKCHAIN_RPC_URL)
-
-	c := ddcBucketContract(client)
-	if err := c.HookContractEvents(); err != nil {
-		log.WithError(err).Fatal("Unable to hook events")
-	}
-
-	if err := client.SetEventDispatcher(DDC_SC_ADDRESS, c.GetEventDispatcher()); err != nil {
-		log.WithError(err).Fatal("Unable to set event dispatcher")
-	}
-
-	return c
-}
-
-func ddcBucketContract(client contract.BlockchainClient) cache.DdcBucketContractCache {
-	cleanupInterval := 1 * time.Hour
-	params := cache.BucketCacheParameters{
-		BucketCacheExpiration: 1 * time.Hour,
-		BucketCacheCleanUp:    cleanupInterval,
-
-		NodeCacheExpiration: 2 * time.Hour,
-		NodeCacheCleanUp:    cleanupInterval,
-
-		AccountCacheExpiration: 30 * time.Minute,
-		AccountCacheCleanUp:    cleanupInterval,
-	}
-
-	return cache.CreateDdcBucketContractCache(bucket.CreateDdcBucketContract(client, DDC_SC_ADDRESS), params)
 }
