@@ -19,20 +19,20 @@ const (
 func main() {
 	bucketContract := createContract()
 
+	getNode(*bucketContract)
+	getCdnNode(*bucketContract)
+	getCluster(*bucketContract)
+	getNodeList(*bucketContract)
+	getCdnNodeList(*bucketContract)
+	getClustersList(*bucketContract)
+	getBucket(*bucketContract)
+	getBucketsList(*bucketContract)
+
+	listenToEvents(*bucketContract)
+
 	createCluster(*bucketContract)
 
-	// getNode(*bucketContract)
-	// getCdnNode(*bucketContract)
-	// getCluster(*bucketContract)
-	// getNodeList(*bucketContract)
-	// getCdnNodeList(*bucketContract)
-	// getClustersList(*bucketContract)
-	// getBucket(*bucketContract)
-	// getBucketsList(*bucketContract)
-
-	// listenToEvents(*bucketContract)
-
-	// select {}
+	select {}
 }
 
 func createContract() *bucket.DdcBucketContract {
@@ -61,6 +61,12 @@ func listenToEvents(bucketContract bucket.DdcBucketContract) {
 		log.Printf("NodeCreatedEvent: %v", nodeCreatedEvent)
 	})
 
+	bucketContract.AddContractEventHandler(bucket.ClusterCreatedEventId, func(raw interface{}) {
+		log.Printf("ClusterCreatedEvent raw: %v", raw)
+		clusterCreatedEvent := raw.(*bucket.ClusterCreatedEvent)
+		log.Printf("ClusterCreatedEvent: %v", clusterCreatedEvent)
+	})
+
 	log.Print("Waiting for events ...")
 }
 
@@ -76,16 +82,14 @@ func getCluster(bucketContract bucket.DdcBucketContract) {
 
 func createCluster(bucketContract bucket.DdcBucketContract) {
 	keyRing, _ := signature.KeyringPairFromSecret("//Alice", NETWORK_PREFIX)
-	cluster := bucket.NewCluster{
-		Params:           "'{\"replicationFactor\":3}'",
-		ResourcePerVNode: 10,
-	}
+	params := "'{\"replicationFactor\":3}'"
+	resourcePerVNode := types.NewU32(10)
 
-	blockHash, err := bucketContract.ClusterCreate(context.Background(), keyRing, &cluster)
+	blockHash, err := bucketContract.ClusterCreate(context.Background(), keyRing, params, resourcePerVNode)
 	if err != nil {
 		log.WithError(err).Fatal("Cannot create a cluster")
 	} else {
-		log.Printf("Cluster created in blockHash - %v", blockHash)
+		log.Printf("Cluster created in blockHash - 0x%x", blockHash)
 	}
 }
 
