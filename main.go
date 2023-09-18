@@ -1,6 +1,9 @@
 package main
 
 import (
+	"context"
+
+	"github.com/centrifuge/go-substrate-rpc-client/v4/signature"
 	"github.com/centrifuge/go-substrate-rpc-client/v4/types"
 	contract "github.com/cerebellum-network/cere-ddc-sdk-go/contract/pkg"
 	"github.com/cerebellum-network/cere-ddc-sdk-go/contract/pkg/bucket"
@@ -10,23 +13,26 @@ import (
 const (
 	DDC_SC_ADDRESS     = "6QHgFfxkYyMdUqMw2rpykwGbKbtiof5bYvFMg17swct85vvX"
 	BLOCKCHAIN_RPC_URL = "wss://archive.devnet.cere.network/ws"
+	NETWORK_PREFIX     = 54
 )
 
 func main() {
 	bucketContract := createContract()
 
-	getNode(*bucketContract)
-	getCdnNode(*bucketContract)
-	getCluster(*bucketContract)
-	getNodeList(*bucketContract)
-	getCdnNodeList(*bucketContract)
-	getClustersList(*bucketContract)
-	getBucket(*bucketContract)
-	getBucketsList(*bucketContract)
+	createCluster(*bucketContract)
 
-	listenToEvents(*bucketContract)
+	// getNode(*bucketContract)
+	// getCdnNode(*bucketContract)
+	// getCluster(*bucketContract)
+	// getNodeList(*bucketContract)
+	// getCdnNodeList(*bucketContract)
+	// getClustersList(*bucketContract)
+	// getBucket(*bucketContract)
+	// getBucketsList(*bucketContract)
 
-	select {}
+	// listenToEvents(*bucketContract)
+
+	// select {}
 }
 
 func createContract() *bucket.DdcBucketContract {
@@ -65,6 +71,21 @@ func getCluster(bucketContract bucket.DdcBucketContract) {
 		log.WithError(err).Fatal("Cannot get a cluster")
 	} else {
 		log.Printf("Cluster - %v", cluster)
+	}
+}
+
+func createCluster(bucketContract bucket.DdcBucketContract) {
+	keyRing, _ := signature.KeyringPairFromSecret("//Alice", NETWORK_PREFIX)
+	cluster := bucket.NewCluster{
+		Params:           "'{\"replicationFactor\":3}'",
+		ResourcePerVNode: 10,
+	}
+
+	blockHash, err := bucketContract.ClusterCreate(context.Background(), keyRing, &cluster)
+	if err != nil {
+		log.WithError(err).Fatal("Cannot create a cluster")
+	} else {
+		log.Printf("Cluster created in blockHash - %v", blockHash)
 	}
 }
 

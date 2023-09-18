@@ -4,14 +4,14 @@ go 1.20
 
 require (
 	github.com/centrifuge/go-substrate-rpc-client/v4 v4.0.8
-	github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230915162238-e8a87fc35f1c
+	github.com/cerebellum-network/cere-ddc-sdk-go/contract v0.1.7-0.20230918194033-e89b2d791cf0
 	github.com/sirupsen/logrus v1.9.3
 )
 
 require (
 	github.com/ChainSafe/go-schnorrkel v1.0.0 // indirect
-	github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230915162238-e8a87fc35f1c // indirect
-	github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230915162238-e8a87fc35f1c // indirect
+	github.com/cerebellum-network/cere-ddc-sdk-go/core v0.1.7-0.20230918194033-e89b2d791cf0 // indirect
+	github.com/cerebellum-network/cere-ddc-sdk-go/model v0.1.7-0.20230918194033-e89b2d791cf0 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/decred/base58 v1.0.4 // indirect
